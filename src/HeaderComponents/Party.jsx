@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import DrinkCards from './DrinkCards'
 import Shimmer from '../Shimmer'
 
-  const Party = () => {
+const Party = () => {
   const [cocktail, setCocktail] = useState([])
   useEffect(() => { fetchdataDrinks() }, [])
 
@@ -14,8 +14,8 @@ import Shimmer from '../Shimmer'
     console.log(cocktail);
   }
 
-  return cocktail.length === 0 ? (<Shimmer/>) : (
-    <> <div >
+  return cocktail.length === 0 ? (<Shimmer />) : (
+    <> <div className='bg-yellow-900'>
       <ul className="grid grid-cols-4 gap-4">
         {cocktail.map((userISUSER) => {
           return (

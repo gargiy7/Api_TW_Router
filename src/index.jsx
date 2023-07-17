@@ -3,14 +3,16 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import Body from './Body'
 import Party from './HeaderComponents/Party'
-import Sports from './HeaderComponents/Sports'
-import Space from './HeaderComponents/Space'
+import Beer from './HeaderComponents/Beer'
 import {
   createBrowserRouter,
   RouterProvider,
   Route,
   Link, Outlet
 } from "react-router-dom";
+import BeerBrewer from './HeaderComponents/BeerBrewer'
+import Cart from './HeaderComponents/Cart'
+import ProductCardDetail from './ProductCardDetail'
 
 const router = createBrowserRouter([
   {
@@ -23,11 +25,19 @@ const router = createBrowserRouter([
       path: "/party",
       element: <Party />,
     }, {
-      path: "/space",
-      element: <Space />,
-    }, {
-      path: "/sports",
-      element: <Sports />,
+      path: "/beer",
+      element: <Beer />,
+    },
+    {
+      path: "/beer/:id",
+      element: <BeerBrewer />,
+    },
+               {
+      path: "/:id",
+      element: <ProductCardDetail />,
+    },{
+      path: "/cart",
+      element: <Cart />,
     },],
   },
 
