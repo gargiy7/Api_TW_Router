@@ -17,7 +17,7 @@ const Body = () => {
 
   return user.length === 0 ? (<Shimmer />) : (
     <> <div >
-      <ul className="grid grid-cols-4 gap-4">
+      <ul className="grid grid-cols-4 gap-4 bg-cyan-800">
         {user.map((userISUSER) => {
           return (<Link to ={ '/' + userISUSER.id } key={userISUSER.id}>
             <ProductCards key={userISUSER.id} {...userISUSER} /></Link>

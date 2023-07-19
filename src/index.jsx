@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import Body from './Body'
-import Party from './HeaderComponents/Party'
+// import Party from './HeaderComponents/Party'
 import Beer from './HeaderComponents/Beer'
 import {
   createBrowserRouter,
@@ -11,8 +11,10 @@ import {
   Link, Outlet
 } from "react-router-dom";
 import BeerBrewer from './HeaderComponents/BeerBrewer'
-import Cart from './HeaderComponents/Cart'
+import Cart from './Cart'
 import ProductCardDetail from './ProductCardDetail'
+
+const Party = lazy(() => import ("./HeaderComponents/Party"));
 
 const router = createBrowserRouter([
   {
@@ -23,7 +25,8 @@ const router = createBrowserRouter([
       element: <Body />,
     }, {
       path: "/party",
-      element: <Party />,
+      element: (
+        <Suspense> <Party /></Suspense>),
     }, {
       path: "/beer",
       element: <Beer />,
@@ -32,10 +35,10 @@ const router = createBrowserRouter([
       path: "/beer/:id",
       element: <BeerBrewer />,
     },
-               {
+    {
       path: "/:id",
       element: <ProductCardDetail />,
-    },{
+    }, {
       path: "/cart",
       element: <Cart />,
     },],

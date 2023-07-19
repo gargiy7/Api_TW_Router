@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { addItems, clearCart, removeItems } from "../utils/CartSlice";
+import { useDispatch } from "react-redux";
 
 const BeerBrewer = () => {
   const { id } = useParams();
@@ -13,7 +16,17 @@ const BeerBrewer = () => {
     setBeerdetail(json);
     console.log(beerdetail);
   }
+  // functions of store & cart
+  const dispatch = useDispatch();
 
+  const handleAddItem = ( beerdetail) => {
+    dispatch(addItems(beerdetail))
+  }
+  const handleRemoveItem = () => {
+    dispatch(removeItems())
+  }
+
+  const cartItems = useSelector(store => store.cart.items)
   // to design the beerBrewery Page
   const BeerDetailfuntion = ({
     name,
@@ -25,10 +38,13 @@ const BeerBrewer = () => {
     // ingredients : {malt :[d,e,f] , hops : [g,h,i,j,k] }
     ingredients: { malt, hops }
   }) => {
-    return (
+    return (<>
       <div className="p-4 m-4 grid grid-cols-4 gap-4 flex justify-center">
         <div className="col-start-1 col-end-2 shadow-inner ring-offset-2 ring-2" >
-          <h3 className="flex justify-center" >{name}</h3>
+          <h3 className="flex justify-center font-mono font-semibold text-xl" >{name}</h3>
+          <div className='flex justify-center w-full bg-cyan-400'>
+            <button onClick={() => handleAddItem(beerdetail)}>Add to Cart</button>
+          </div>
           <div className='flex justify-center'>
             <img className='h-96' src={image_url} />
           </div>
@@ -77,7 +93,7 @@ const BeerBrewer = () => {
           </div>
         </div>
       </div>
-    );
+    </>);
   };
 
   // returns the date fetched from API to the funtion

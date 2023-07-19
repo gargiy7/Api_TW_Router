@@ -1,5 +1,8 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { addItems, clearCart, removeItems } from "./utils/CartSlice";
+import { useDispatch } from "react-redux";
 
 const ProductCardDetail = () => {
   const { id } = useParams();
@@ -7,19 +10,43 @@ const ProductCardDetail = () => {
   useEffect(() => { fetchdataProductdetail() }, [])
 
   const fetchdataProductdetail = async () => {
-    const data = await fetch('https://makeup-api.herokuapp.com/api/v1/products/' + id + '.json'  );
+    const data = await fetch('https://makeup-api.herokuapp.com/api/v1/products/' + id + '.json');
     const json = await data.json()
     console.log(json)
     setProductdetail(json);
     console.log(productdetail);
   }
+  // functions of store & cart
+  const dispatch = useDispatch();
 
+  const handleAddItem = (productdetail) => {
+    dispatch(addItems(productdetail))
+  }
+  const handleRemoveItem = () => {
+    dispatch(removeItems())
+  }
+
+  const cartItems = useSelector(store => store.cart.items)
   return (
     <>
-    <div> Product card id is this -----   {id}--- {productdetail.name}
-    </div>
-      <img src={productdetail.image_link}/>
-  </>)
+      <h1 className='flex justify-center'>Product card id  ----->>>   {id}----{Object.keys(productdetail).length}</h1>
+      <div className="p-4 m-4 grid grid-cols-4 gap-4 flex justify-center">
+        <div className="col-start-1 col-end-2 p-4 ">
+          <div className='flex justify-center outline outline-offset-2 outline-cyan-500'>
+            <img src={productdetail.image_link} />
+          </div>
+          <div className=' m-4 p-4 flex justify-center underline'>{productdetail.name}</div>
+          <div className='flex justify-center w-full bg-cyan-400'><button onClick={() => handleAddItem(productdetail)}>Add to Cart</button></div>
+        </div>
+        <div className="col-start-2 col-end-5 p-4">
+          <div className="italic">"{productdetail.description}"</div>
+          <p className="flex justify-center">for details click on the link below</p>
+          <p className='flex justify-center animate-bounce text-4xl'>👇🏽</p>
+          <div className='flex justify-center'>{productdetail.product_link}</div>
+          <div className='flex justify-center w-full bg-cyan-400'><button >Buy Now @ ₹{productdetail.price * 60}</button></div>
+        </div>
+      </div>
+    </>)
 }
 export default ProductCardDetail;
 

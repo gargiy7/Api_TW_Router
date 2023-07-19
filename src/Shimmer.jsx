@@ -1,6 +1,6 @@
 const Shimmer = () => {
   return (
-    <div className="grid grid-cols-4 gap-4 p-4 m-4">
+    <div className="grid grid-cols-4 gap-4 p-4 m-4 bg-cyan-800">
       <div className="bg-slate-300 w-64 h-64 animate-pulse"></div>
       <div className="bg-slate-300 w-64 h-64 animate-pulse "></div>
       <div className="bg-slate-300 w-64 h-64 animate-pulse "></div>
