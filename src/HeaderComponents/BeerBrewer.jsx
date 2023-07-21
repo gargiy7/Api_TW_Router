@@ -19,7 +19,7 @@ const BeerBrewer = () => {
   // functions of store & cart
   const dispatch = useDispatch();
 
-  const handleAddItem = ( beerdetail) => {
+  const handleAddItem = (beerdetail) => {
     dispatch(addItems(beerdetail))
   }
   const handleRemoveItem = () => {
@@ -42,15 +42,16 @@ const BeerBrewer = () => {
       <div className="p-4 m-4 grid grid-cols-4 gap-4 flex justify-center">
         <div className="col-start-1 col-end-2 shadow-inner ring-offset-2 ring-2" >
           <h3 className="flex justify-center font-mono font-semibold text-xl" >{name}</h3>
-          <div className='flex justify-center w-full bg-cyan-400'>
-            <button onClick={() => handleAddItem(beerdetail)}>Add to Cart</button>
-          </div>
           <div className='flex justify-center'>
             <img className='h-96' src={image_url} />
           </div>
           <p className="flex justify-center">{tagline}</p>
         </div>
         <div className="col-start-2 col-end-5 divide-y-4 leading-relaxed divide-blue-200">
+          <div className='flex justify-center w-full bg-cyan-400'>
+            <button onClick={() => handleAddItem(beerdetail)}>Add to Cart</button>
+          </div>
+
           <div>Description --- {description}</div>
           <span >This can be best enjoyed with ----</span>
           {/* <ul >
